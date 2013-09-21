@@ -8,15 +8,12 @@
 
 <h3 id="meteorhelp">meteor help</h3>
 
-Get help on meteor command line usage. Running `meteor help` by
-itself will list the common meteor
-commands. Running <code>meteor help <i>command</i></code> will print
-detailed help about the command.
+command line 사용 법에 대한 도움말을 표시합니다. `meteor help`를 실행하면 일반적인 meteor command들의 목록을 표시합니다. <code>meteor help <i>command</i></code> 는 해당 명령에 대한 자세한 내용을 표시합니다.
 
 
 <h3 id="meteorrun">meteor run</h3>
 
-Run a meteor development server in the current project. Searches
+현재 프로젝트의 Meteor 개발 서버를 실행합니다. Searches
 upward from the current directory for the root directory of a Meteor
 project. Whenever you change any of the application's source files, the
 changes are automatically detected and applied to the running
@@ -37,33 +34,21 @@ Run `meteor help run` to see the full list of options.
 
 <h3 id="meteorcreate">meteor create <i>name</i></h3>
 
-Create a new Meteor project. Makes a subdirectory named *name*
-and copies in the template app. You can pass an absolute or relative
-path.
+새로운 Meteor 프로젝트를 만듭니다. *name* 으로 명명한 서브디렉토리를 만들고 template 어플리케이션을 복사합니다. 절대경로나 상대경로를 지정할 수 있습니다.
 
 
 <h3 id="meteordeploy">meteor deploy <i>site</i></h3>
 
-Deploy the project in your current directory to Meteor's servers.
+현재 디렉토리의 프로젝트를 Meteor 서버에 배포합니다.
 
 
-You can deploy to any available name
-under `meteor.com` without any additional
-configuration, for example, `myapp.meteor.com`.  If
-you deploy to a custom domain, such as `myapp.mydomain.com`,
-then you'll need to make sure the DNS for that domain is configured to
-point at `origin.meteor.com`.
+별도의 설정 없이, 예를 들어 `myapp.meteor.com`과 같은 `meteor.com` 아래에 사용가능한 이름이라면 배포할 수 있습니다. 만약 당신이 `myapp.mydomain.com`과 같이 사용자 도메인에 디플로이 한다면 해당 도메인의 DNS가 origin.meteor.com 으로 향하고 있는지 확인해야 합니다.
 
 
-
-You can deploy in debug mode by passing `--debug`. This
-will leave your source code readable by your favorite in-browser
-debugger, just like it is in local development mode.
+`--debug`를 지정하면 디버그 모드로 배포할 수 있습니다. 이는 로컬 개발 환경과 같이 소스 코드가 브라우저 디버거에서 읽을 수 있는 상태로 합니다.
 
 
-
-To delete an application you've deployed, specify
-the `--delete` option along with the site.
+배포한 어플리케이션을 지려면 사이트 이름과 합께 `--delete` 옵션을 지정하세요.
 
 
 
