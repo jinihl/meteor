@@ -2,6 +2,10 @@
 
 Meteor 0.6.5.1 한글 번역
 
+## 미리 보기
+	cd docs_kr/
+	meteor
+
 ## 번역 대상 경로
 
 docs_kr/client
