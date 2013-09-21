@@ -17,3 +17,7 @@ sh merge.sh
 ### api 병합
 
 sh split.sh
+
+## Deploy
+
+meteor krdocs.meteor.com
