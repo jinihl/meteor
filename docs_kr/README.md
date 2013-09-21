@@ -28,6 +28,10 @@ api.html_split~ 아래의 api?? 파일들을 수정 후 merge.sh 로 확인
 
 단 api.html 를 병합한 파일은 올리지 않는다.
 
+## concepts.html
+
+api.html 과 동일
+
 ## Deploy
 
 meteor krdocs.meteor.com

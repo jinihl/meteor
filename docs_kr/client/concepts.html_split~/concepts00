@@ -1,0 +1,23 @@
+<template name="concepts">
+
+<h1 id="concepts">Concepts</h1>
+
+우리는 맨손으로 페이지 하나 짜리 JavaScript 앱을 수도 없이 만들어 왔다. 언어 하나(JavaScript)와 데이터 포멧 하나(JSON)로 앱 전체를 개발하는 것을 늘 꿈꿨다. Meteor에는 앱을 개발하면서 우리가 바랬던 모든 것이 들어 있다.
+
+
+{{> whatismeteor }}
+{{> structure }}
+{{> data }}
+{{> reactivity }}
+{{> livehtml }}
+{{> templates }}
+{{> packages_concept }}
+{{> namespacing }}
+{{> deploying }}
+{{> packages_writing }}
+</template>
+
+<template name="whatismeteor">
+
+{{#better_markdown}}
+
