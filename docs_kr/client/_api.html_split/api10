@@ -1,0 +1,175 @@
+<h2 id="templates_api"><span>Templates</span></h2>
+
+A template that you declare as `<{{! }}template name="foo"> ... </{{!
+}}template>` can be accessed as the function `Template.foo`, which
+returns a string of HTML when called.
+
+The same template may occur many times on the page, and these
+occurrences are called template instances.  Template instances have a
+life cycle of being created, put into the document, and later taken
+out of the document and destroyed.  Meteor manages these stages for
+you, including determining when a template instance has been removed
+or replaced and should be cleaned up.  You can associate data with a
+template instance, and you can access its DOM nodes when it is in the
+document.
+
+Additionally, Meteor will maintain a template instance and its state
+even if its surrounding HTML is re-rendered into new DOM nodes.  As
+long as the structure of template invocations is the same, Meteor will
+not consider any instances to have been created or destroyed.  You can
+request that the same DOM nodes be retained as well using `preserve`
+and `constant`.
+
+There are a number of callbacks and directives that you can specify on
+a named template and that apply to all instances of the template.
+They are described below.
+
+{{> api_box template_call}}
+
+When called inside a template helper, the body of `Meteor.render`, or
+other settings where reactive HTML is being generated, the resulting
+HTML is annotated so that it renders as reactive DOM elements.
+Otherwise, the HTML is unadorned and static.
+
+
+{{> api_box template_rendered}}
+
+This callback is called once when an instance of Template.*myTemplate* is
+rendered into DOM nodes and put into the document for the first time, and again
+each time any part of the template is re-rendered.
+
+In the body of the callback, `this` is a [template
+instance](#template_inst) object that is unique to this occurrence of
+the template and persists across re-renderings.  Use the `created` and
+`destroyed` callbacks to perform initialization or clean-up on the
+object.
+
+{{> api_box template_created}}
+
+This callback is called when an invocation of *myTemplate* represents
+a new occurrence of the template and not a re-rendering of an existing
+template instance.  Inside the callback, `this` is the new [template
+instance](#template_inst) object.  Properties you set on this object
+will be visible from the `rendered` and `destroyed` callbacks and from
+event handlers.
+
+This callback fires once and is the first callback to fire.  Every
+`created` has a corresponding `destroyed`; that is, if you get a
+`created` callback with a certain template instance object in `this`,
+you will eventually get a `destroyed` callback for the same object.
+
+{{> api_box template_destroyed}}
+
+This callback is called when an occurrence of a template is taken off
+the page for any reason and not replaced with a re-rendering.  Inside
+the callback, `this` is the [template instance](#template_inst) object
+being destroyed.
+
+This callback is most useful for cleaning up or undoing any external
+effects of `created`.  It fires once and is the last callback to fire.
+
+
+{{> api_box template_events}}
+
+Declare event handers for instances of this template. Multiple calls add
+new event handlers in addition to the existing ones.
+
+See [Event Maps](#eventmaps) for a detailed description of the event
+map format and how event handling works in Meteor.
+
+{{> api_box template_helpers}}
+
+Each template has a local dictionary of helpers that are made available to it,
+and this call specifies helpers to add to the template's dictionary.
+
+Example:
+
+    Template.myTemplate.helpers({
+      foo: function () {
+        return Session.get("foo");
+      }
+    });
+
+In Handlebars, this helper would then be invoked as `{{dstache}}foo}}`.
+
+The following syntax is equivalent, but won't work for reserved property
+names:
+
+    Template.myTemplate.foo = function () {
+      return Session.get("foo");
+    };
+
+{{> api_box template_preserve}}
+
+You can "preserve" a DOM element during re-rendering, leaving the
+existing element in place in the document while replacing the
+surrounding HTML.  This means that re-rendering a template need not
+disturb text fields, iframes, and other sensitive elements it
+contains.  The elements to preserve must be present both as nodes in
+the old DOM and as tags in the new HTML.  Meteor will patch the DOM
+around the preserved elements.
+
+{{#note}}
+By default, new Meteor apps automatically include the
+`preserve-inputs` package.  This preserves all elements of type
+`input`, `textarea`, `button`, `select`, and `option` that have unique
+`id` attributes or that have `name` attributes that are unique within
+an enclosing element with an `id` attribute.  To turn off this default
+behavior, simply remove the `preserve-inputs` package.
+{{/note}}
+
+Preservation is useful in a variety of cases where replacing a DOM
+element with an identical or modified element would not have the same
+effect as retaining the original element.  These include:
+
+* Input text fields and other form controls
+* Elements with CSS animations
+* Iframes
+* Nodes with references kept in JavaScript code
+
+If you want to preserve a whole region of the DOM, an element and its
+children, or nodes not rendered by Meteor, use a [constant
+region](#constant) instead.
+
+To preserve nodes, pass a list of selectors, each of which should match
+at most one element in the template.  When the template is re-rendered,
+the selector is run on the old DOM and the new DOM, and Meteor will
+reuse the old element in place while working in any HTML changes around
+it.
+
+A second form of `preserve` takes a labeling function for each selector
+and allows the selectors to match multiple nodes. The node-labeling
+function takes a node and returns a label string that is unique for each
+node, or `false` to exclude the node from preservation.
+
+For example, to preserve all `<input>` elements with ids in template 'foo', use:
+
+    Template.foo.preserve({
+      'input[id]': function (node) { return node.id; }
+    });
+
+Selectors are interpreted as rooted at the top level of the template.
+Each occurrence of the template operates independently, so the selectors
+do not have to be unique on the entire page, only within one occurrence
+of the template.  Selectors will match nodes even if they are in
+sub-templates.
+
+Preserving a node does *not* preserve its attributes or contents. They
+will be updated to reflect the new HTML. Text in input fields is not
+preserved unless the input field has focus, in which case the cursor and
+selection are left intact. Iframes retain their navigation state and
+animations continue to run as long as their parameters haven't changed.
+
+There are some cases where nodes can not be preserved because of
+constraints inherent in the DOM API. For example, an element's tag name
+can't be changed, and it can't be moved relative to its parent or other
+preserved nodes.  For this reason, nodes that are re-ordered or
+re-parented by an update will not be preserved.
+
+{{#note}}
+Previous versions of Meteor had an implicit page-wide `preserve`
+directive that labeled nodes by their "id" and "name" attributes.
+This has been removed in favor of the explicit, opt-in mechanism.
+{{/note}}
+
+

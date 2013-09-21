@@ -1,0 +1,76 @@
+<h2 id="assets"><span>Assets</span></h2>
+
+{{#better_markdown}}
+`Assets` allows server code in a Meteor application to access static server
+assets, which are located in the `private` subdirectory of an application's
+tree.
+
+{{> api_box assets_getText }}
+{{> api_box assets_getBinary }}
+
+Static server assets are included by placing them in the application's `private`
+subdirectory. For example, if an application's `private` subdirectory includes a
+directory called `nested` with a file called `data.txt` inside it, then server
+code can read `data.txt` by running:
+
+    var data = Assets.getText('nested/data.txt');
+{{/better_markdown}}
+
+</template>
+
+
+
+
+
+
+<template name="api_box">
+<div class="api {{bare}}">
+<h3 id="{{id}}">
+  <a class="name selflink" href="#{{id}}">{{{name}}}</a>
+{{#if locus}}
+  <span class="locus">{{locus}}</span>
+{{/if}}
+</h3>
+
+<div class="desc">
+{{#each descr}}{{#better_markdown}}{{{this}}}{{/better_markdown}}{{/each}}
+</div>
+
+{{#if args}}
+<h4>Arguments</h4>
+{{> api_box_args args}}
+{{/if}}
+
+{{#if options}}
+<h4>Options</h4>
+{{> api_box_args options}}
+{{/if}}
+
+{{#if body}}
+{{#better_markdown}}{{{body}}}{{/better_markdown}}
+{{/if}}
+
+</div>
+
+</template>
+
+
+
+<template name="api_box_args">
+<dl class="args">
+{{#each this}}
+<dt><span class="name">{{{name}}}</span>
+  <span class="type">
+    {{#if type_link}}
+      <a href="#{{type_link}}">{{{type}}}</a>
+    {{else}}
+      {{{type}}}
+    {{/if}}
+  </span></dt>
+<dd>{{#better_markdown}}{{{descr}}}{{/better_markdown}}</dd>
+{{/each}}
+</dl>
+</template>
+
+
+<template name="api_section_helper">

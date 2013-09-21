@@ -6,15 +6,31 @@ not here -->
 
 {{#markdown}}
 
-<b>_Meteor는 현대적인 웹사이트를 만들기에 적합한 초간단 개발 환경이다. 최고의 도구를 가지고도 몇 주가 걸리던 작업을 이제는 Meteor로 몇 시간 만에 할 수 있다._</b>
+<b>_Meteor is an ultra-simple environment for building modern websites.
+What once took weeks, even with the best tools, now takes hours with
+Meteor._</b>
 
-웹은 애초에 70년대 메인 프레임 개념으로 작동하도록 설계됐다. 애플리케이션 서버는 화면에 무언가 출력하고, 출력된 화면은 네트워크에 물려 있는 더미 터미널로 전송된다. 사용자가 어떤 작업을 하게 되면 애플리케이션 서버는 화면을 전부 다시 출력해야 한다. 이 모델은 10년이 넘도록 웹에서 사용되었다. 이 모델 위에 LAMP, Rails, Django, PHP 등이 생겨났다.
+The web was originally designed to work in the same way that mainframes
+worked in the 70s.  The application server rendered a screen and sent it
+over the network to a dumb terminal. Whenever the user did anything,
+that server rerendered a whole new screen. This model served the Web
+well for over a decade. It gave rise to LAMP, Rails, Django, PHP.
 
-요즘은 최고의 팀으로 엄청난 예산과 길고 긴 계획과 일정을 잡고서, 자바스크립트를 이용해 클라이언트에서 돌아가는 앱을 만든다. 이 앱은 인터페이스도 훌륭하다. 페이지를 새로 고칠 필요도 없다. 어떤 클라이언트에서 변화가 일어나면 접속해 있는 다른 클라이언트 화면에 변화가 적용되는, Reactive한 특성도 있다.
+But the best teams, with the biggest budgets and the longest schedules,
+now build applications in JavaScript that run on the client.  These apps
+have stellar interfaces.  They don't reload pages.  They are reactive:
+changes from any client immediately appear on everyone's screen.
 
-지금까지 이런 앱을 만드는 방법은 고된 길이었다. Meteor를 사용하면 이런 규모의 일을 매우 쉽고 더 재미있게 할 수 있다. 일주일 만에 완벽한 앱을 완성하거나 Hackathon에서 하룻밤만에 쓸만한 앱을 만들 수 있다. 이제는 서버에 리소스를 배포하고, 클라우드에 API 앤드포인트를 설치하고, 데이터베이스를 관리하고, ORM 레이어 논쟁에 휘말리고, JavaScript와 Ruby를 번갈아가며 쓰고, 클라이언트에서 데이터 업데이트하는 등의 일에 신경 쓰지 않아도 된다.
+They've built them the hard way.  Meteor makes it an order of
+magnitude simpler, and a lot more fun.  You can build a complete
+application in a weekend, or a sufficiently caffeinated hackathon.  No
+longer do you need to provision server resources, or deploy API
+endpoints in the cloud, or manage a database, or wrangle an ORM layer,
+or swap back and forth between JavaScript and Ruby, or broadcast data
+invalidations to clients.
 
-Meteor는 지금 만드는 중이다. 하지만, 이것이 우리 생각의 방향을 나타낼 것으로 생각한다. 어떤 의견이라도 우리는 온 맘으로 환영한다.
+Meteor is a work in progress, but we hope it shows the direction of
+our thinking.  We'd love to hear your feedback.
 
 
 ## Quick start!
@@ -22,21 +38,22 @@ Meteor는 지금 만드는 중이다. 하지만, 이것이 우리 생각의 방�
 <!-- change colors on these. $ and command output in grey, rest in
 white -->
 
-아래 예제들은 Meteor가 [지원하는 모든 플랫폼](https://github.com/meteor/meteor/wiki/Supported-Platforms)에서 동작한다.
+The following works on all [supported
+platforms](https://github.com/meteor/meteor/wiki/Supported-Platforms).
 
-Meteor 설치:
+Install Meteor:
 
 <pre>
 $ curl https://install.meteor.com | /bin/sh
 </pre>
 
-새로 프로젝트 생성:
+Create a project:
 
 <pre>
 $ meteor create myapp
 </pre>
 
-로컬에서 실행하기:
+Run it locally:
 
 <pre>
 $ cd myapp
@@ -44,7 +61,7 @@ $ meteor
 =&gt; Meteor server running on: http://localhost:3000/
 </pre>
 
-세상에 공개하기(우리는 무료 서버도 제공한다):
+Unleash it on the world (on a free server we provide):
 
 <pre>
 $ meteor deploy myapp.meteor.com
@@ -53,28 +70,37 @@ $ meteor deploy myapp.meteor.com
 <h2 id="sevenprinciples">Seven Principles of Meteor</h2>
 
 <!-- wire with [1,2,3] on it -->
-- _데이터만 전송_. 네트워크로 HTML을 보내지 마라. 데이터만 보내고 어떻게 그릴지는 클라이언트에서 결정하도록 하라.
+- _Data on the Wire_. Don't send HTML over the network. Send data and
+let the client decide how to render it.
 
 <!-- two people, one speech bubble coming out of both of their mouths,
 containing '{}' -->
-- _하나의 언어._ 클라이언트 코드도 서버 코드도 자바스크립트라는 하나의 언어로 작성하라.
+- _One Language._ Write both the client and the server parts of your
+interface in JavaScript.
 
 <!-- globe, with the same database icon in US and Russia -->
-- _데이터베이스는 어디에서나_. 클라이언트 환경과 서버 환경을 가리지 않고 데이터베이스에 접근할 때는 동일한 API를 사용하라.
+- _Database Everywhere_. Use the same transparent API to access your
+database from the client or the server.
 
 <!-- clock with zero time elapsed. or clock on left with zero time
 elapsed, horizontal bold line to a clock with zero time elapsed, but a
 line at a 45 degree angle to a a clock in grey with 100 ms
 elapsed. like shades of relativity -->
-- _레이턴시 보정_. 클라이언트는 데이터베이스로의 데이터 전송 처리가 즉각적으로 보이도록 프리패칭과 모델 시뮬레이션을 사용하라.
+- _Latency Compensation_. On the client, use prefetching and model
+simulation to make it look like you have a zero-latency connection to
+the database.
 
 <!-- knee getting hit with hammer like in reflex test -->
-- _Full Stack Reactivity_. 실시간성을 기본으로 내포하도록 만들라. 데이터베이스에서 템플릿까지의 모든 레이어가 이벤트-드리븐 인터페이스에 대처할 수 있게 하여야 한다.
+- _Full Stack Reactivity_. Make realtime the default. All layers, from
+database to template, should make an event-driven interface available.
 
-- _에코 시스템 수용_. Meteor는 현존하는 오픈소스 도구나 프레임워크를 대체하는 것이 아니라 그것을 통합하여 만든다. Meteor도 오픈 소스이다.
+- _Embrace the Ecosystem_. Meteor is open source and integrates,
+rather than replaces, existing open source tools and frameworks.
 
 <!-- zen circle -->
-- _단순함은 곧 생산성_. 어떤 것을 간단하게 보이도록 만드는 최고의 방법은 진짜로 간단하게 만드는 것이다. 단아하고 아름답고 깔끔한 API로 단순하게 만들어라.
+- _Simplicity Equals Productivity_. The best way to make something
+seem simple is to have it actually _be_ simple. Accomplish this through
+clean, classically beautiful APIs.
 
 
 <h2 id="resources">Developer Resources</h2>
@@ -82,24 +108,32 @@ elapsed. like shades of relativity -->
 <!-- https://github.com/blog/273-github-ribbons -->
 <a href="http://github.com/meteor/meteor"><img class="github-ribbon visible-desktop" style="position: absolute; top: 0; right: 0; border: 0;" src="/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
 
-만약 Meteor에 끌리고 있다면, 이 프로젝트에 참여하기를 바란다!
+If anything in Meteor catches your interest, we hope you'll get involved
+with the project!
 
 <dl class="involved">
 <dt><span>Stack Overflow</span></dt>
-<dd>기술적인 문제에 대해 질문을 하던 답변을 하던 [Stack Overflow](http://stackoverflow.com/questions/tagged/meteor)가 정말 좋다. 질문을 올릴 때 반드시 <code>meteor</code>태그를 달도록 한다.
+<dd>The best place to ask (and answer!) technical questions is on <a href="http://stackoverflow.com/questions/tagged/meteor">Stack
+  Overflow</a>.  Be sure to add
+  the <code>meteor</code> tag to your question.
 </dd>
 
-<dt><span>MAILING LISTS</span></dt>
+<dt><span>Mailing lists</span></dt>
 <dd>
-  Meteor에는 두 개의 메일링 리스트가 있다. <nobr><a href="http://groups.google.com/group/meteor-talk"><code>meteor-talk@googlegroups.com</code></a></nobr> 일반적인 질문이나 도움 요청, 새로운 프로젝트 공지 등을 위한 곳이다. <nobr><a href="http://groups.google.com/group/meteor-core"><code>meteor-core@googlegroups.com</code></a></nobr>은
-  Meteor 내부적인 토론이나 변경 제안을 위한 곳이다.
+  We have two mailing lists for Meteor.  <nobr><a href="http://groups.google.com/group/meteor-talk"><code>meteor-talk@googlegroups.com</code></a></nobr>
+  is for general questions, requests for help, and new project
+  announcements.
+  <nobr><a href="http://groups.google.com/group/meteor-core"><code>meteor-core@googlegroups.com</code></a></nobr>
+  is for discussing Meteor internals and proposed changes.
 </dd>
 
 <dt><span>IRC</span></dt>
-<dd><code>irc.freenode.net</code>의 <code>#meteor</code> 채널에 개발자들이 모여 있다. 그들이 할 수 있는 한은 당신의 질문에 답해줄 테다. </dd>
+<dd><code>#meteor</code> on <code>irc.freenode.net</code>. The
+developers hang out here and will answer your questions whenever they
+can.</dd>
 
 <dt><span>GitHub</span></dt>
-<dd>코드는 <a href="http://github.com/meteor/meteor">GitHub</a>에 있다. Pull Request로 패치를 보내고 GitHub의 버그 트래커로 버그를 알려주기 바란다. </dd>
+<dd>The code is on <a href="http://github.com/meteor/meteor">GitHub</a>. The best way to send a patch is with a GitHub pull request, and the best way to file a bug is in the <a href="https://github.com/meteor/meteor/issues/">GitHub bug tracker</a>, after reading our <a href="https://github.com/meteor/meteor/blob/devel/Contributing.md#filing-bug-reports">guide to filing bug reports</a>. If the issue contains sensitive information or raises a security concern, email <code>security</code><code>@</code><code>meteor</code><code>.</code><code>com</code> instead, which will page the security team.</dd>
 </dl>
 
 {{/markdown}}

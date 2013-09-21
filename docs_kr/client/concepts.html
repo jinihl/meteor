@@ -2,10 +2,8 @@
 
 <h1 id="concepts">Concepts</h1>
 
-We've written our fair share of single-page JavaScript applications by hand.
-Writing an entire application in one language (JavaScript) with one
-data format (JSON) is a real joy.  Meteor is everything we wanted
-when writing those apps.
+우리는 맨손으로 페이지 하나 짜리 JavaScript 앱을 수도 없이 만들어 왔다. 언어 하나(JavaScript)와 데이터 포멧 하나(JSON)로 앱 전체를 개발하는 것을 늘 꿈꿨다. Meteor에는 앱을 개발하면서 우리가 바랬던 모든 것이 들어 있다.
+
 
 {{> whatismeteor }}
 {{> structure }}
@@ -23,30 +21,21 @@ when writing those apps.
 
 {{#better_markdown}}
 
-<h2 id="whatismeteor">What is Meteor?</h2>
+<h2 id="whatismeteor">Meteor는 무엇입니까?</h2>
 
-Meteor is two things:
+Meteor는 크게 두 가지를 의미합니다.:
 
-* A _library of packages_: pre-written, self-contained modules that
-you might need in your app.<br>
-There are about a dozen core Meteor
-packages that most any app will use (for example `webapp`, which
-handles incoming HTTP connections, and `templating`, which lets you
-make HTML templates that automatically update live as data changes).
-Then there are optional packages like `email`, which lets your app
-send emails, or the Meteor Accounts series (`account-password`,
-`accounts-facebook`, `accounts-ui`, and others) which provide a
-full-featured user account system that you can drop right into your
-app. And beyond these "official" packages, there are hundreds of
-community-written packages in [Atmosphere](https://atmosphere.meteor.com/),
-one of which might do just what you need.
+* _패키지들의 모음_: 당신의 앱에서 필요할 법한 미리 만들고, 자신을 포함한 모듈들<br>
+대부분의 앱에서 사용하는 (가령 HTTP 연결을 다루는 `webapp`이나 데이터가 변할 때 마다 자동으로 갱신하는 HTML 템플릿을 만드는 `templating`) 십 수개의 Meteor 패키지가 있다.
+그리고 부가적으로 `email` 같이 당신의 앱에서 메일을 보낼 수 있는 패키지나 당신의 앱에 떨어뜨려 놓으면 바로 사용할 수 있는 완전한 사용자 계정 시스템을 구현한 Meteor 계정 시리즈 (`account-password`,
+`accounts-facebook`, `accounts-ui`, and others).
+그리고 이러한 "공식" 패키지들 이외에도 [Atmosphere](https://atmosphere.meteor.com/) 커뮤니티에서 작성한 당장 당신이 필요할만 수백개의 패키지들이 있다.
 
-* A _command-line tool_ called `meteor`.<br>
-`meteor` is a build tool analogous to `make`, `rake`, or the non-visual parts of
-Visual Studio. It gathers up all of the source files and assets in your
-application, carries out any necessary build steps (such as compiling
-[CoffeeScript](http://coffeescript.org), minifying CSS, building
-[npm](https://npmjs.org/) modules, or generating source maps), fetches the
+* `meteor`라고 부르는 _command-line 도구.<br>
+`meteor`는 `make`, `rake`, 혹은 
+Visual Studio의 보이지 않는 부분에 해당하는 빌드 툴입니다. 이는 당신의 어플리케이션 안에 있는 소스 파일과 자원들을 모두 긁어 모으고 필요한 빌드 과정을 수행하며 (가령 
+[CoffeeScript](http://coffeescript.org)를 컴파일 하거나, CSS를 압축하거나, 
+[npm](https://npmjs.org/) 모듈을 빌드하거나, source maps을 생성하는 등), fetches the
 packages used by your app, and outputs a standalone, ready-to-run application
 bundle. In development mode it can do all of this interactively, so that
 whenever you change a file you immediately see the changes in your browser. It's
@@ -77,21 +66,12 @@ Atmosphere.
 
 <h2 id="structuringyourapp">Structuring your application</h2>
 
-A Meteor application is a mix of JavaScript that runs inside a client web
-browser, JavaScript that runs on the Meteor server inside a
-[Node.js](http://nodejs.org/) container, and all the supporting HTML fragments,
-CSS rules, and static assets.  Meteor automates the packaging and transmission
-of these different components.  And, it is quite flexible about how you choose
-to structure those components in your file tree.
+Meteor 어플리케이션은 브라우저가 실행하는 클라이언트 JavaScript와 [Node.js](http://nodejs.org/) 컨테이너가 실행하는 서버 JavaScript가 한데 섞여 있다. HTML 파일, CSS 파일, 그 외의 정적 파일도 함께 섞여 있다. 이 모든 파일을 패키징하고 배포하는 일을 Meteor가 모두 자동화했다. 어느 디렉토리에 해당 파일을 넣을지에 대한 제약은 거의 없다. 자유롭게 넣으면 된다.
 
-The only server assets are JavaScript and files in the `private` subdirectory.
-Meteor gathers all your JavaScript
-files, excluding anything under the `client`, `public`, and `private`
-subdirectories, and loads them into a Node.js
-server instance inside a fiber.  In Meteor, your server code runs in
-a single thread per request, not in the asynchronous callback style
-typical of Node.  We find the linear execution model a better fit for
-the typical server code in a Meteor application.
+서버쪽 자원은 오직 Javascript와 `private`의 서브디렉토리에 있는 파일들 뿐이다.
+Meteor는 당신의 `client`, `public`, `private` 서브디렉토리를 제외한 모든 파일들을 모아 fiber안에서 Node.js 서버 인스턴스에 적재한다.
+Meteor는 당신의 서버코드를 일반적인 Node의 비동기 콜백 스타일과는 달리 개별 요청 마다 하나의 스레드로 실행한다.
+우리는 Meteor 어플리케이션 안에 통상적인 서버코드에서 더욱 적합한 선형적 실행 모델을 찾아냈다.
 
 Meteor gathers any files under the `private` subdirectory and makes the contents
 of these files available to server code via the [`Assets`](#assets) API. The
