@@ -35,27 +35,17 @@ Meteor는 크게 두 가지를 의미합니다.:
 `meteor`는 `make`, `rake`, 혹은 
 Visual Studio의 보이지 않는 부분에 해당하는 빌드 툴입니다. 이는 당신의 어플리케이션 안에 있는 소스 파일과 자원들을 모두 긁어 모으고 필요한 빌드 과정을 수행하며 (가령 
 [CoffeeScript](http://coffeescript.org)를 컴파일 하거나, CSS를 압축하거나, 
-[npm](https://npmjs.org/) 모듈을 빌드하거나, source maps을 생성하는 등), fetches the
-packages used by your app, and outputs a standalone, ready-to-run application
-bundle. In development mode it can do all of this interactively, so that
-whenever you change a file you immediately see the changes in your browser. It's
-super easy to use out of the box, but it's also extensible: you can add support
-for new languages and compilers by adding build plugin packages to your app.
+[npm](https://npmjs.org/) 모듈을 빌드하거나, source maps을 생성하는 등), 패키지를 앱에 반영하고, 실행 할 수 있는 별도의 독립적인 응용 프로그램 번들을 만듭니다. 개발 모드에선 파일을 변경한 경우 곧 브라우저에서도 볼 수 있도록 그 모두가 상호작용으로 이루어 집니다.
+이는 환경에 의존하지 않고 이용하는데 매우 간단하지만 유연한 방법입니다: 빌드 플러그인 패키지를 어플리케이션에 추가하면 새로운 언어와 컴파일러에 대한 지원을 추가할 수 있습니다.
 
-The key idea in the Meteor package system is that _everything should
-work identically in the browser and on the server_ (wherever it makes
-sense, of course: browsers can't send email and servers can't capture
-mouse events). Our whole ecosystem has been built from the ground up
-to support this.
+Meteor 패키지 시스템의 핵심은 _브라우저와 서버의 모든 것은 똑같이 작동한다_ (물론 가능한 범위에서 어디에서든지 - 브라우저가 메일을 보낼 수 없으며, 서버에서 마우스 이벤트를 가져올 수 없습니다) 입니다.
+Meteor의 모든 에코 시스템은 이를 지원하기 위해 만들었습니다.
 
 {{#note}}
-`meteor` cannot yet fetch packages from Atmosphere. If you are using
-Atmosphere packages you should take a look at
-[Meteorite](http://oortcloud.github.io/meteorite/), a tool that will
-help you download and manage your Atmosphere packages.
+`meteor` 아직 Atmosphere에서 패키지를 가져올 수 없습니다. 만일 Atmosphere를 사용하고자 한다면 Atmosphere 패키지들을 다운로드하고 관리하는 것을 도와주는 도구인 
+[Meteorite](http://oortcloud.github.io/meteorite/)를 참조하세요.
 
-In Meteor 1.0, the `meteor` build tool will have full support for
-Atmosphere.
+Meteor 1.0에선 `meteor` 빌드 도구에서 완전한 Atmosphere를 완벽히 지원할 것입니다.
 {{/note}}
 
 {{/better_markdown}}
